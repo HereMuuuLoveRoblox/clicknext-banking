@@ -1,9 +1,12 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
-import { Wallet, History } from 'lucide-react'
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Wallet, History, LogOut } from 'lucide-react'
+import { removeCookie } from '@/lib/cookie'
+import { Button } from '@/components/ui/button'
 import clicknextLogo from '@/assets/icons/clicknext-logo.png'
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -22,15 +25,25 @@ const menuItems = [
 
 function MainLayout() {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const currentTitle = menuItems.find((item) => item.url === location.pathname)?.title
+
+  const handleLogout = () => {
+    removeCookie('email')
+    navigate('/login', { replace: true })
+  }
 
   return (
     <SidebarProvider>
-      <Sidebar variant="floating" collapsible="icon">
-        <SidebarHeader className="flex h-14 mt-2 items-center justify-center border-b">
-          <img src={clicknextLogo} alt="ClickNext Logo" className="h-auto w-[80%]" />
+      <Sidebar  collapsible="icon">
+        <SidebarHeader className="flex h-14 mt-2 items-center justify-center overflow-hidden border-b">
+          <img
+            src={clicknextLogo}
+            alt="ClickNext Logo"
+            className="h-auto w-[80%] group-data-[collapsible=icon]:hidden"
+          />
         </SidebarHeader>
-
-
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
@@ -51,12 +64,21 @@ function MainLayout() {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-
-
+        <SidebarFooter>
+          <Button
+            variant="outline"
+            onClick={handleLogout}
+            className="w-full justify-center group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:p-0"
+          >
+            <LogOut />
+            <span className="group-data-[collapsible=icon]:hidden">Logout</span>
+          </Button>
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset>
         <header className="flex h-14 items-center gap-2 border-b px-4">
           <SidebarTrigger />
+          <h1 className="text-base font-semibold">{currentTitle}</h1>
         </header>
         <div className="flex-1 p-4">
           <Outlet />
