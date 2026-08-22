@@ -92,17 +92,19 @@ function TransactionCardList({ transactions, onEdit, onDelete }) {
     <div className="flex flex-col gap-3 sm:hidden">
       {transactions.map((tx) => (
         <Card key={tx.id}>
-          <CardContent className="flex flex-col gap-2">
+          <CardContent className="flex flex-col gap-4">
             <div className="flex items-start justify-between">
-              <StatusBadge tx={tx} />
-              <span className="font-semibold">
+              <p className="text-sm text-muted-foreground">{formatDatetime(tx.datetime)}</p>
+              <span className="font-semibold flex flex-col gap-1">
+                <StatusBadge tx={tx} />
                 <AmountText tx={tx} />
               </span>
             </div>
-            <p className="text-sm text-muted-foreground">{formatDatetime(tx.datetime)}</p>
-            <p className="truncate text-sm text-muted-foreground">{tx.email}</p>
-            <div className="flex justify-end gap-1">
-              <TransactionActions onEdit={() => onEdit(tx)} onDelete={() => onDelete(tx)} />
+            <div className="flex justify-between gap-1">
+              <p className="truncate text-sm text-muted-foreground">{tx.email}</p>
+              <div className="flex gap-6">
+                <TransactionActions onEdit={() => onEdit(tx)} onDelete={() => onDelete(tx)} />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -117,11 +119,11 @@ function TransactionTable({ transactions, onEdit, onDelete }) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Datetime</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead>วันที่</TableHead>
+            <TableHead>จำนวนเงิน</TableHead>
+            <TableHead>ประเภทธุรกรรม</TableHead>
+            <TableHead>อีเมล</TableHead>
+            <TableHead className="text-right">จัดการ</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -278,6 +280,9 @@ function TransactionHistory() {
         </p>
       ) : (
         <>
+          <p className="text-sm text-muted-foreground">
+            แสดง 1 ถึง {transactions.length} จาก {transactions.length} รายการ
+          </p>
           <TransactionCardList transactions={transactions} onEdit={openEdit} onDelete={setDeletingTx} />
           <TransactionTable transactions={transactions} onEdit={openEdit} onDelete={setDeletingTx} />
         </>

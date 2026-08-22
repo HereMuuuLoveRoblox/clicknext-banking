@@ -1,8 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
+
+// Pages
 import Login from '@/pages/Login'
 import DepositWithdraw from '@/pages/DepositWithdraw'
 import TransactionHistory from '@/pages/TransactionHistory'
+
 import ProtectedRoute from '@/components/ProtectedRoute'
 import { Toaster } from '@/components/ui/sonner'
 

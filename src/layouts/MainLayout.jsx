@@ -3,6 +3,7 @@ import { Wallet, History, LogOut } from 'lucide-react'
 import { removeCookie } from '@/lib/cookie'
 import { Button } from '@/components/ui/button'
 import clicknextLogo from '@/assets/icons/clicknext-logo.png'
+import clicknextLogo2 from '@/assets/icons/clicknext-logo-2.png'
 import {
   Sidebar,
   SidebarContent,
@@ -41,7 +42,12 @@ function MainLayout() {
           <img
             src={clicknextLogo}
             alt="ClickNext Logo"
-            className="h-auto w-[80%] group-data-[collapsible=icon]:hidden"
+            className="h-7 w-auto group-data-[collapsible=icon]:hidden"
+          />
+          <img
+            src={clicknextLogo2}
+            alt="ClickNext Logo"
+            className="hidden h-auto w-10 group-data-[collapsible=icon]:block"
           />
         </SidebarHeader>
         <SidebarContent>
