@@ -1,12 +1,21 @@
-import { useState } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import MainLayout from '@/layouts/MainLayout'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-  <div className="container mx-auto">
-      <h1 className="text-3xl font-bold text-primary">ClickNext Banking</h1>
-    </div>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route index element={<Navigate to="/deposit-withdraw" replace />} />
+        <Route
+          path="/deposit-withdraw"
+          element={<div>Deposit / Withdraw page placeholder</div>}
+        />
+        <Route
+          path="/transaction"
+          element={<div>Transaction page placeholder</div>}
+        />
+      </Route>
+    </Routes>
   )
 }
 
