@@ -150,7 +150,7 @@ function DepositWithdraw() {
                   : 'bg-destructive text-white hover:bg-destructive/90'
               }
             >
-              ยืนยัน{pendingAction?.type === TRANSACTION_TYPE.DEPOSIT ? 'ฝากเงิน' : 'ถอนเงิน'}
+              ยืนยันการ{pendingAction?.type === TRANSACTION_TYPE.DEPOSIT ? 'ฝาก' : 'ถอน'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
