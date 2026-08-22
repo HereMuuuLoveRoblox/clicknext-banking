@@ -142,7 +142,16 @@ function DepositWithdraw() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>ยกเลิก</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirm}>ยืนยัน</AlertDialogAction>
+            <AlertDialogAction
+              onClick={handleConfirm}
+              className={
+                pendingAction?.type === TRANSACTION_TYPE.DEPOSIT
+                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  : 'bg-destructive text-white hover:bg-destructive/90'
+              }
+            >
+              ยืนยัน{pendingAction?.type === TRANSACTION_TYPE.DEPOSIT ? 'ฝากเงิน' : 'ถอนเงิน'}
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
